@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "Super Munchkin",
+    "slug": "supermunchkin",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.pepyta.supermunchkin",
+      "adaptiveIcon": {
+        "backgroundColor": "#fad196",
+        "foregroundImage": "./assets/icon-foreground.png"
+      }
+    }
+  }
+}
