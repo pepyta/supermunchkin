@@ -30,7 +30,6 @@ export default class ProfileScreen extends React.Component<{
         profile[target] += value;
         this.setState(data);
         await updateProfile(this.props.route.params.id, profile);
-        console.log(target + ": " + profile[target])
     }
 
     async changeGender() {
@@ -38,7 +37,6 @@ export default class ProfileScreen extends React.Component<{
         profile.gear = this.state.gear;
         profile.level = this.state.level;
         profile.isMale = !this.state.isMale;
-        console.log(profile);
         this.setState(profile);
         await updateProfile(this.props.route.params.id, profile);
     }

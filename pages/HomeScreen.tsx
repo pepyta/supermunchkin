@@ -11,12 +11,10 @@ import { componentDidMount, componentDidUpdate } from '../utils/hooks';
 export default function HomeScreen({ navigation }) {
     const theme = useTheme();
     const [profiles, setProfiles] = useState(new Array<Profile>());
-    const [lastUpdated, setLastUpdated] = useState(0);
     const [snackBarVisible, setSnackBarVisible] = useState(false);
 
     componentDidMount(() => {
         navigation.addListener('focus', () => {
-            console.log("ys");
             getProfiles().then((result) => {
                 setProfiles(result);
             });
@@ -68,7 +66,7 @@ export default function HomeScreen({ navigation }) {
             <FlatList
                 contentContainerStyle={{ padding: 12, paddingBottom: 0 }}
                 data={profiles}
-                renderItem={(profile) => <ProfileCard id={profile.index} name={profile.item.name} isMale={profile.item.isMale} level={profile.item.level} gear={profile.item.gear} delete={removeProfile} navigation={navigation} />}
+                renderItem={(profile) => <ProfileCard id={profile.index} name={profile.item.name} isMale={profile.item.isMale} level={profile.item.level} gear={profile.item.gear} deleteFunction={removeProfile} navigation={navigation} />}
                 keyExtractor={(profile) => `profile-${profile.id}-${profile.name}`}
             />}
             <FAB

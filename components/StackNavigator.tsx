@@ -8,6 +8,7 @@ import { DrawerActions } from '@react-navigation/native';
 import ProfileScreen from '../pages/ProfileScreen';
 import MonsterScreen from '../pages/MonsterScreen';
 import FightScreen from '../pages/FightScreen';
+import SettingsScreen from '../pages/SettingsScreen';
 
 const Stack = createStackNavigator();
 
@@ -68,6 +69,10 @@ export default function StackNavigator({ navigation }) {
                 options={{
                     title: "Your profile"
                 }} />
+            <Stack.Screen
+                name="Settings"
+                component={SettingsScreen}
+            />
             <Stack.Screen
                 name="MonsterScreen"
                 component={MonsterScreen}

@@ -1,5 +1,4 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import { exp } from 'react-native-reanimated';
 
 export type Profile = {
     id: number,
@@ -15,7 +14,6 @@ export async function getProfiles(){
     if(resp === null) return new Array<Profile>();
 
     let data:Array<Profile> = JSON.parse(resp);
-    console.log(data);
     return data;
 }
 

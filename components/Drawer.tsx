@@ -1,14 +1,15 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Linking } from 'react-native';
 import { DrawerItem, DrawerContentScrollView } from '@react-navigation/drawer';
-import { Title, Caption, Paragraph, Drawer, Text, TouchableRipple, Switch } from 'react-native-paper';
+import { Title, Caption, Paragraph, Drawer, Text, TouchableRipple, Switch, Theme, useTheme } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { NavigationHelpers } from '@react-navigation/native';
 import { DrawerNavigationEventMap } from '@react-navigation/drawer/lib/typescript/src/types';
 import { getProfiles } from '../utils/storage';
 
-export default class DrawerContent extends React.Component<{
-	navigation: NavigationHelpers<Record<string, object | undefined>, DrawerNavigationEventMap>
+class DrawerContent extends React.Component<{
+	navigation: NavigationHelpers<Record<string, object | undefined>, DrawerNavigationEventMap>,
+	theme: Theme
 }> {
 	state = {
 		levels: 0,
@@ -26,7 +27,9 @@ export default class DrawerContent extends React.Component<{
 
 	render() {
 		return (
-			<DrawerContentScrollView {...this.props}>
+			<DrawerContentScrollView style={{
+				backgroundColor: this.props.theme.colors.surface
+			}} {...this.props}>
 				<View style={styles.drawerContent}>
 					<View style={styles.userInfoSection}>
 						<Title style={styles.title}>Super Munchkin</Title>
@@ -57,7 +60,6 @@ export default class DrawerContent extends React.Component<{
 							)}
 							label="Home"
 							onPress={() => {
-								console.log(this.props.navigation)
 								this.props.navigation.navigate("Profiles");
 							 }}
 						/>
@@ -66,13 +68,29 @@ export default class DrawerContent extends React.Component<{
 								<MaterialCommunityIcons name="settings" color={color} size={size} />
 							)}
 							label="Settings"
-							onPress={() => { }}
+							onPress={() => {
+								this.props.navigation.navigate("Settings");
+							 }}
+						/>
+						<DrawerItem
+							icon={({ color, size }) => (
+								<MaterialCommunityIcons name="github-box" color={color} size={size} />
+							)}
+							label="Source code"
+							onPress={() => { 
+								Linking.openURL("https://github.com/pepyta/supermunchkin");
+							}}
 						/>
 					</View>
 				</View>
 			</DrawerContentScrollView>
 		);
 	}
+}
+
+export default function DrawerWithHooks({ navigation }){
+	const theme = useTheme();
+	return <DrawerContent navigation={navigation} theme={theme} />
 }
 
 const styles = StyleSheet.create({
