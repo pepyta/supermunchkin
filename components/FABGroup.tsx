@@ -36,7 +36,6 @@ class FABGroup extends React.Component<{
                         { icon: 'sword', label: 'Start a fight', onPress: () => { this.props.navigation.navigate("FightScreen", {
                             base: this.props.base
                         }) } },
-                        { icon: 'sword-cross', label: 'Join a fight', onPress: () => console.log('Pressed star') },
                         { icon: 'cow', label: "Count monster's score", onPress: () => { this.props.navigation.navigate("MonsterScreen") } },
                     ]}
                     onStateChange={this._onStateChange}

@@ -4,7 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider as PaperProvider, DefaultTheme, DarkTheme } from 'react-native-paper';
 import Main from './components/Main';
-import { View } from 'react-native';
 
 const Stack = createStackNavigator();
 
