@@ -85,12 +85,10 @@ jobs:
             --keystore-alias $EXPO_ANDROID_KEYSTORE_ALIAS
             --type app-bundle
             -o $ARTIFACT_PATH
-            
+
 deploy:
   provider: releases
   api_key: "${GITHUB_API_KEY}"
   file: "*/*.apk"
-  skip_cleanup: true,
+  cleanup: false
   draft: true
-  on:
-    tags: true
