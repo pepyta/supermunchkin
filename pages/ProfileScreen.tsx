@@ -1,7 +1,7 @@
 import React from 'react';
 import { Profile, updateProfile } from '../utils/storage';
 import { View, StyleSheet } from 'react-native';
-import { Button, IconButton, FAB, Text, useTheme } from 'react-native-paper';
+import { Button, IconButton, Text, useTheme } from 'react-native-paper';
 import FABGroup from '../components/FABGroup';
 
 export default function(params: {

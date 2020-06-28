@@ -1,5 +1,5 @@
-import React, { Ref } from 'react';
-import { Card, Title, Paragraph, TouchableRipple, Theme, useTheme, Text, Button } from 'react-native-paper';
+import React from 'react';
+import { Card, Title, TouchableRipple, Theme, useTheme, Button } from 'react-native-paper';
 import { View } from 'react-native';
 import RBSheet from "react-native-raw-bottom-sheet";
 import ProfileBadge from './ProfileBadge';

@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { Card, Title, Paragraph, Switch, Text } from 'react-native-paper';
 import Container from '../components/Container';
 import { View } from 'react-native';
-import SyncStorage from 'sync-storage';
 import ThemeContext from '../utils/themeContext';
 import AsyncStorage from '@react-native-community/async-storage';
 

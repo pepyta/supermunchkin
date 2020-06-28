@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, Title, TextInput, RadioButton, Text, Button, IconButton, useTheme, Theme } from 'react-native-paper';
-import { Row, Col } from 'react-native-easy-grid';
 import { View } from 'react-native';
 import { createProfile } from '../utils/storage';
 import { NavigationHelpers } from '@react-navigation/native';

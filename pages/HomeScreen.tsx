@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, FlatList, View, Text } from 'react-native';
-import Container from '../components/Container';
 import ProfileCard from '../components/ProfileCard';
 import { FAB, useTheme, Snackbar, Title, Subheading } from 'react-native-paper';
 import { getProfiles, deleteProfile } from '../utils/storage';
 import { Profile } from '../utils/storage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { componentDidMount, componentDidUpdate } from '../utils/hooks';
+import { componentDidMount } from '../utils/hooks';
 
 export default function HomeScreen({ navigation }) {
     const theme = useTheme();

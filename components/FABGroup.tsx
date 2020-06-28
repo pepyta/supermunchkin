@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FAB, Portal, Provider, useTheme, Theme, Modal, Text } from 'react-native-paper';
+import { FAB, Portal, useTheme, Theme, Modal } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 class FABGroup extends React.Component<{
