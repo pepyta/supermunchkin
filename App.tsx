@@ -17,7 +17,7 @@ export default function App() {
   });
 
   AsyncStorage.getItem("@theme").then((result) => {
-    if (result == "dark") {
+    if (result == "dark" && !state.isDark) {
       dispatch({ type: "TOGGLE_DARK_MODE", value: true })
     }
   })
