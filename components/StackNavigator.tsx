@@ -31,7 +31,7 @@ export default function StackNavigator({ navigation }) {
                     return (
                         <Appbar.Header
                             style={{
-                                backgroundColor: theme.colors.primary
+                                backgroundColor: theme.dark ? "#000" : theme.colors.primary
                             }}>
                             {previous ? (
                                 <Appbar.BackAction
