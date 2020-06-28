@@ -1,23 +1,51 @@
 import 'react-native-gesture-handler';
-import * as React from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider as PaperProvider, DefaultTheme, DarkTheme } from 'react-native-paper';
 import { StatusBar } from 'expo-status-bar';
 import Main from './components/Main';
-import ThemeContext from './utils/themeContext';
-import reducer from './utils/reducer';
+import ThemeContext from './utils/SettingsContext';
 import AsyncStorage from '@react-native-community/async-storage';
+import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
 
 export default function App() {
-  const [state, dispatch] = React.useReducer(reducer, {
-    isDark: false
+  const [state, dispatch] = React.useReducer((state: {
+    isDark: boolean,
+    keepAwake: boolean
+  }, action) => {
+    if(action.type == "TOGGLE_DARK_MODE"){
+      return {
+        isDark: action.value,
+        keepAwake: state.keepAwake
+      }
+    } else if(action.type == "TOGGLE_KEEP_AWAKE"){
+      if(action.value){
+        activateKeepAwake();
+      } else {
+        deactivateKeepAwake();
+      }
+      
+      return {
+        isDark: state.isDark,
+        keepAwake: action.value
+      };
+    }
+  }, {
+    isDark: false,
+    keepAwake: false
   });
 
   AsyncStorage.getItem("@theme").then((result) => {
     if (result == "dark" && !state.isDark) {
       dispatch({ type: "TOGGLE_DARK_MODE", value: true })
     }
-  })
+  });
+
+  AsyncStorage.getItem("@keepAwake").then((result) => {
+    if (result == "on" && !state.keepAwake) {
+      dispatch({ type: "TOGGLE_KEEP_AWAKE", value: false })
+    }
+  });
 
   return (
     <ThemeContext.Provider value={{ state, dispatch }}>

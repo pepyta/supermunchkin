@@ -2,8 +2,9 @@ import React, { useState, useContext } from 'react';
 import { Card, Title, Paragraph, Switch, Text } from 'react-native-paper';
 import Container from '../components/Container';
 import { View } from 'react-native';
-import ThemeContext from '../utils/themeContext';
-import AsyncStorage from '@react-native-community/async-storage';
+import ThemeContext from '../utils/SettingsContext';
+import DarkModeToggle from '../components/settings/DarkModeToggle';
+import KeepAwakeToggle from '../components/settings/KeepAwakeToggle';
 
 export default function SettingsScreen() {
     const { dispatch, state } = useContext(ThemeContext);
@@ -18,20 +19,8 @@ export default function SettingsScreen() {
                 <Card>
                     <Card.Content>
                         <Title>Visual Prefences</Title>
-                        <View style={{
-                            flexDirection: 'row',
-                            justifyContent: 'space-between',
-                            paddingTop: 12,
-                        }}>
-                            <Text>Dark theme</Text>
-                            <View>
-
-                                <Switch value={state.isDark} onValueChange={async (value) => {
-                                    await AsyncStorage.setItem("@theme", value ? "dark" : "light")
-                                    dispatch({ type: "TOGGLE_DARK_MODE", value });
-                                }} />
-                            </View>
-                        </View>
+                        <DarkModeToggle />
+                        <KeepAwakeToggle />
                     </Card.Content>
                 </Card>
             </Container>
