@@ -88,6 +88,6 @@ jobs:
 deploy:
   provider: releases
   api_key: "${GITHUB_API_KEY}"
-  file: "*/*.apk"
+  file: "${ARTIFACT_PATH}"
   cleanup: false
   draft: true
