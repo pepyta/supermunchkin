@@ -40,21 +40,24 @@ class ProfileCard extends React.Component<{
                     </TouchableRipple >
                 </Card>
                 <RBSheet
+                    customStyles={{
+                        container: {
+                            backgroundColor: this.props.theme.dark ? this.props.theme.colors.primary : "#fff"
+                        }
+                    }}
                     closeOnDragDown={true}
                     ref={this.bottomSheetRef}
                     height={300}
                     openDuration={250}
                 >
                     <View style={{
-                        width: "100%",
-                        minHeight: 300,
-                        backgroundColor: "white"
+                        width: "100%"
                     }}>
                         <Button style={{
                             marginHorizontal: 10,
                             marginTop: 10
                         }}
-                            color="black"
+                            color={this.props.theme.dark ? "white" : "black"}
                             icon={"delete"}
                             mode="outlined"
                             onPress={() => {
