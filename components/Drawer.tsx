@@ -51,6 +51,7 @@ class DrawerContent extends React.Component<{
 					</View>
 					<View style={styles.drawerSection}>
 						<DrawerItem
+							inactiveTintColor={this.props.theme.dark ? "white" : "black"}
 							icon={({ color, size }) => (
 								<MaterialCommunityIcons
 									name="home"
@@ -61,9 +62,10 @@ class DrawerContent extends React.Component<{
 							label="Home"
 							onPress={() => {
 								this.props.navigation.navigate("Profiles");
-							 }}
+							}}
 						/>
 						<DrawerItem
+							inactiveTintColor={this.props.theme.dark ? "white" : "black"}
 							icon={({ color, size }) => (
 								<MaterialCommunityIcons name="settings" color={color} size={size} />
 							)}
@@ -73,6 +75,7 @@ class DrawerContent extends React.Component<{
 							 }}
 						/>
 						<DrawerItem
+							inactiveTintColor={this.props.theme.dark ? "white" : "black"}
 							icon={({ color, size }) => (
 								<MaterialCommunityIcons name="github-box" color={color} size={size} />
 							)}

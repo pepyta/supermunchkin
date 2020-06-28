@@ -1,14 +1,26 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Button, Text, IconButton } from 'react-native-paper';
+import { Button, Text, IconButton, useTheme } from 'react-native-paper';
 
-export default class FightScreen extends React.Component<{
+export default function(params: {
     navigation: any,
     route: {
         params: {
             base: number
         }
     }
+}){
+    return <FightScreen darkMode={useTheme().dark} navigation={params.navigation} route={params.route} />
+}
+
+class FightScreen extends React.Component<{
+    navigation: any,
+    route: {
+        params: {
+            base: number
+        }
+    },
+    darkMode: boolean
 }> {
     state = {
         bonuses: 0,
@@ -76,7 +88,7 @@ export default class FightScreen extends React.Component<{
                     <Button icon="content-copy" style={{
                         width: 300,
                         alignSelf: "center"
-                    }} mode="text" color="black" onPress={() => {
+                    }} mode="text" color={this.props.darkMode ? "white" : "black"} onPress={() => {
                         this.setState({
                             clone: !this.state.clone
                         })

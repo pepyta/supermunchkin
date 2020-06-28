@@ -1,13 +1,21 @@
 import React from 'react';
-import { Card, Title, TextInput, RadioButton, Text, Button, IconButton } from 'react-native-paper';
+import { Card, Title, TextInput, RadioButton, Text, Button, IconButton, useTheme, Theme } from 'react-native-paper';
 import { Row, Col } from 'react-native-easy-grid';
 import { View } from 'react-native';
 import { createProfile } from '../utils/storage';
 import { NavigationHelpers } from '@react-navigation/native';
 import { DrawerNavigationEventMap } from '@react-navigation/drawer/lib/typescript/src/types';
+import Container from '../components/Container';
 
-export default class CreateProfileScreen extends React.Component<{
-	navigation: NavigationHelpers<Record<string, object | undefined>, DrawerNavigationEventMap>
+export default function(props: {
+    navigation: NavigationHelpers<Record<string, object | undefined>, DrawerNavigationEventMap>
+}){
+    return <CreateProfileScreen navigation={props.navigation} theme={useTheme()} />
+}
+
+class CreateProfileScreen extends React.Component<{
+    navigation: NavigationHelpers<Record<string, object | undefined>, DrawerNavigationEventMap>,
+    theme: Theme
 }> {
     state = {
         name: "",
@@ -20,7 +28,11 @@ export default class CreateProfileScreen extends React.Component<{
 
     render() {
         return (
-            <Card>
+            <Container>
+                
+            <Card style={{
+                marginTop: 10
+            }}>
                 <Card.Content>
                   
                     <Title>
@@ -39,6 +51,13 @@ export default class CreateProfileScreen extends React.Component<{
                         mode="outlined"
                         onChangeText={name => this.setState({ name })}
                         autoFocus={true}
+                        placeholderTextColor={this.props.theme.dark ? "white" : "black"}
+                        theme={this.props.theme.dark ? {
+                            colors: {
+                                primary: "white",
+                                background: "#303030"
+                            }
+                        } : {}}
                     />
 
                     <View style={{
@@ -47,7 +66,7 @@ export default class CreateProfileScreen extends React.Component<{
                         <Button icon={this.state.isMale ? "gender-male" : "gender-female"} style={{
                             width: 150,
                             alignSelf: "center"
-                        }} mode="text" color={"black"} onPress={() => {
+                        }} mode="text" color={this.props.theme.colors.text} onPress={() => {
                             this.setState({
                                 isMale: !this.state.isMale
                             })
@@ -56,7 +75,7 @@ export default class CreateProfileScreen extends React.Component<{
                         </Button>
                     </View>
 
-                    <Button icon="plus" mode="text" disabled={this.state.name.trim() == ""} color="black" onPress={async () => {
+                    <Button icon="plus" mode="text" disabled={this.state.name.trim() == ""} color={this.props.theme.colors.text} onPress={async () => {
                         await this.addProfile();
                         this.props.navigation.goBack();
                     }}>
@@ -64,6 +83,7 @@ export default class CreateProfileScreen extends React.Component<{
                     </Button>
                 </Card.Content>
             </Card>
+            </Container>
         );
     }
 }

@@ -14,10 +14,12 @@ const Stack = createStackNavigator();
 
 export default function StackNavigator({ navigation }) {
     const theme = useTheme();
-
     return (
         <Stack.Navigator
             screenOptions={{
+                cardStyle: theme.dark ? {
+                    backgroundColor: "black"
+                } : {},
                 header: ({ scene, previous, navigation }) => {
                     const { options } = scene.descriptor;
                     const title =

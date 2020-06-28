@@ -1,8 +1,14 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Button, Text, IconButton } from 'react-native-paper';
+import { Button, Text, IconButton, useTheme } from 'react-native-paper';
 
-export default class MonsterScreen extends React.Component {
+export default function(){
+    return <MonsterScreen darkMode={useTheme().dark} />
+}
+
+class MonsterScreen extends React.Component<{
+    darkMode: boolean
+}> {
     state = {
         level: 1,
         bonuses: 0,
@@ -80,7 +86,7 @@ export default class MonsterScreen extends React.Component {
                     <Button icon="content-copy" style={{
                         width: 250,
                         alignSelf: "center"
-                    }} mode="text" color="black" onPress={() => {
+                    }} mode="text" color={this.props.darkMode ? "white" : "black"} onPress={() => {
                         this.setState({
                             clone: !this.state.clone
                         })

@@ -1,15 +1,23 @@
 import React from 'react';
 import { Profile, updateProfile } from '../utils/storage';
-import { View, Text, StyleSheet } from 'react-native';
-import Container from '../components/Container';
-import { Title, Button, IconButton, FAB } from 'react-native-paper';
+import { View, StyleSheet } from 'react-native';
+import { Button, IconButton, FAB, Text, useTheme } from 'react-native-paper';
 import FABGroup from '../components/FABGroup';
 
-export default class ProfileScreen extends React.Component<{
+export default function(params: {
     navigation: any,
     route: {
         params: Profile
     }
+}){
+    return <ProfileScreen darkMode={useTheme().dark} navigation={params.navigation} route={params.route} />
+}
+class ProfileScreen extends React.Component<{
+    navigation: any,
+    route: {
+        params: Profile
+    },
+    darkMode: boolean
 }, {
     gear: number,
     level: number,
@@ -122,7 +130,7 @@ export default class ProfileScreen extends React.Component<{
                     <Button icon={this.state.isMale ? "gender-male" : "gender-female"} style={{
                         width: 150,
                         alignSelf: "center"
-                    }} mode="text" color={"black"} onPress={() => {
+                    }} mode="text" color={this.props.darkMode ? "white" : "black"} onPress={() => {
                         this.changeGender();
                     }}>
                         {this.state.isMale ? "Male" : "Female"}

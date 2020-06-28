@@ -3,22 +3,38 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider as PaperProvider, DefaultTheme, DarkTheme } from 'react-native-paper';
+import { StatusBar } from 'expo-status-bar';
 import Main from './components/Main';
+import ThemeContext from './utils/themeContext';
+import reducer from './utils/reducer';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  const currentTheme = darkTheme;
+  const [state, dispatch] = React.useReducer(reducer, {
+    isDark: false
+  });
+
+  AsyncStorage.getItem("@theme").then((result) => {
+    if (result == "dark") {
+      dispatch({ type: "TOGGLE_DARK_MODE", value: true })
+    }
+  })
+
   return (
-    <PaperProvider theme={theme}>
-      <NavigationContainer>
-        <Main />
-      </NavigationContainer>
-    </PaperProvider>
+    <ThemeContext.Provider value={{ state, dispatch }}>
+      <PaperProvider theme={state.isDark ? darkTheme : lightTheme}>
+        <StatusBar style={state.isDark ? "light" : "dark"} />
+        <NavigationContainer>
+          <Main />
+        </NavigationContainer>
+      </PaperProvider>
+    </ThemeContext.Provider>
   );
 }
 
-const theme = {
+const lightTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
@@ -27,11 +43,12 @@ const theme = {
 };
 
 const darkTheme = {
-  ...DefaultTheme,
-  roundness: 2,
+  ...DarkTheme,
   colors: {
     ...DarkTheme.colors,
-    primary: '#000',
-    surface: '#121212'
+    primary: '#202020',
+    surface: '#202020',
+    text: '#fff',
+    onSurface: '#fff'
   },
 };
