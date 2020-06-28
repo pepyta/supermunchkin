@@ -1,15 +1,12 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { Provider as PaperProvider, DefaultTheme, DarkTheme } from 'react-native-paper';
 import { StatusBar } from 'expo-status-bar';
 import Main from './components/Main';
 import ThemeContext from './utils/themeContext';
 import reducer from './utils/reducer';
 import AsyncStorage from '@react-native-community/async-storage';
-
-const Stack = createStackNavigator();
 
 export default function App() {
   const [state, dispatch] = React.useReducer(reducer, {
