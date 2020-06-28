@@ -56,7 +56,7 @@ export default function HomeScreen({ navigation }) {
                     }}>
                         <Title>
                             No profile found
-                            </Title>
+                        </Title>
                         <Subheading>
                             Click on the add button to create a profile!
                         </Subheading>

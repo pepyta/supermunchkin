@@ -2,6 +2,7 @@ import React, { Ref } from 'react';
 import { Card, Title, Paragraph, TouchableRipple, Theme, useTheme, Text, Button } from 'react-native-paper';
 import { View } from 'react-native';
 import RBSheet from "react-native-raw-bottom-sheet";
+import ProfileBadge from './ProfileBadge';
 
 class ProfileCard extends React.Component<{
     id: number,
@@ -32,9 +33,24 @@ class ProfileCard extends React.Component<{
                                 <Title>
                                     {this.props.name}
                                 </Title>
-                                <Paragraph>
-                                    Level: {this.props.level} | Gear: {this.props.gear}
-                                </Paragraph>
+                                
+                                <View style={{
+                                    flexDirection: "row",
+                                    flex: 1
+                                }}>
+                                    <ProfileBadge>
+                                        Level: {this.props.level}
+                                    </ProfileBadge>
+                                    
+                                    {this.props.gear > 0 ? 
+                                    <ProfileBadge>
+                                        Gear: {this.props.gear}
+                                    </ProfileBadge> : <></>}
+                                    
+                                    <ProfileBadge>
+                                        {this.props.isMale ? "Male" : "Female"}
+                                    </ProfileBadge>
+                                </View>
                             </View>
                         </Card.Content>
                     </TouchableRipple >
