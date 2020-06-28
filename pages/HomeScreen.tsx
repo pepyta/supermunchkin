@@ -49,7 +49,7 @@ export default function HomeScreen({ navigation }) {
                     <View style={{
                         flex: 0.3
                     }}>
-                        <MaterialCommunityIcons name={"close"} size={80} />
+                        <MaterialCommunityIcons color={useTheme().dark ? "white" : "black"} name={"close"} size={80} />
                     </View>
                     <View style={{
                         flex: 0.7
