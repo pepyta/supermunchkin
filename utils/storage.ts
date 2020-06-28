@@ -20,7 +20,7 @@ export async function getProfiles(){
 export async function createProfile(name: string, isMale: boolean){
     let profiles = await getProfiles();
 
-    profiles.push({
+    profiles.unshift({
         id: profiles.length,
         name,
         isMale,
