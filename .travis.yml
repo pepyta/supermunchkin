@@ -57,6 +57,12 @@ jobs:
             --keystore-alias $EXPO_ANDROID_KEYSTORE_ALIAS
             --type apk
             -o $ARTIFACT_PATH
+      deploy:
+        provider: releases
+        api_key: "${GITHUB_API_KEY}"
+        file: "${ARTIFACT_PATH}"
+        cleanup: false
+        draft: true
     - stage: build standalone apps
       env:
         - CACHE_NAME=build-android-v3 YARN_CACHE_FOLDER="/home/travis/yarn_cache"
@@ -84,10 +90,9 @@ jobs:
             --keystore-alias $EXPO_ANDROID_KEYSTORE_ALIAS
             --type app-bundle
             -o $ARTIFACT_PATH
-
-deploy:
-  provider: releases
-  api_key: "${GITHUB_API_KEY}"
-  file: "${ARTIFACT_PATH}"
-  cleanup: false
-  draft: true
+      deploy:
+        provider: releases
+        api_key: "${GITHUB_API_KEY}"
+        file: "${ARTIFACT_PATH}"
+        cleanup: false
+        draft: true
