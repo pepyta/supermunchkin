@@ -22,7 +22,14 @@ class ProfileCard extends React.Component<{
                 <Card style={{ borderRadius: 5, marginBottom: 12 }}>
                     <TouchableRipple
                         onPress={() => {
-                            this.props.navigation.navigate("ProfileScreen", this.props)
+                            this.props.navigation.navigate("ProfileScreen", {
+                                id: this.props.id,
+                                name: this.props.name,
+                                level: this.props.level,
+                                gear: this.props.gear,
+                                isMale: this.props.isMale,
+                                theme: this.props.theme
+                            })
                         }}
                         onLongPress={() => {
                             this.bottomSheetRef.current.open();
