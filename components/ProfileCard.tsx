@@ -1,6 +1,7 @@
 import React from 'react';
-import { Card, Title, Paragraph, TouchableRipple, Theme, useTheme } from 'react-native-paper';
+import { Card, Title, Paragraph, TouchableRipple, Theme, useTheme, Text, Button } from 'react-native-paper';
 import { View } from 'react-native';
+import { BottomSheet } from 'react-native-btr';
 
 class ProfileCard extends React.Component<{
     id: number,
@@ -12,15 +13,22 @@ class ProfileCard extends React.Component<{
     navigation: any,
     theme: Theme
 }> {
+    state = {
+        bottomSheetVisible: false
+    }
+
     render() {
         return (
+            <>
             <Card style={{ borderRadius: 5, marginBottom: 12 }}>
                 <TouchableRipple
                     onPress={() => {
                         this.props.navigation.navigate("ProfileScreen", this.props)
                     }}
                     onLongPress={() => {
-                        this.props.delete(this.props.id);
+                        this.setState({
+                            bottomSheetVisible: true
+                        })
                     }}
                     rippleColor="rgba(0, 0, 0, .32)">
                     <Card.Content style={{ padding: 20, borderRadius: 5 }}>
@@ -35,6 +43,43 @@ class ProfileCard extends React.Component<{
                     </Card.Content>
                 </TouchableRipple >
             </Card>
+            
+        <BottomSheet
+          visible={this.state.bottomSheetVisible}
+          onBackButtonPress={() => {
+            this.setState({
+                bottomSheetVisible: false
+            })
+          }}
+          onBackdropPress={() => {
+            this.setState({
+                bottomSheetVisible: false
+            })
+          }}
+        >
+            <View style={{
+                width: "100%",
+                minHeight: 300,
+                backgroundColor: "white"
+            }}>
+                <Button style={{
+                    marginHorizontal: 10,
+                    marginTop: 10
+                }}
+                color="black"
+                icon={"delete"}
+                mode="outlined"
+                onPress={() => {
+                    this.setState({
+                        bottomSheetVisible: false
+                    });
+                    this.props.delete(this.props.id);
+                }}>
+                    Delete profile
+                </Button>
+            </View>
+        </BottomSheet>
+          </>
         );
     }
 }
