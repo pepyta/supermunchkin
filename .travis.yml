@@ -60,7 +60,8 @@ jobs:
             -o $ARTIFACT_PATH
       deploy:
         provider: releases
-        tag_name: "Version v${PACKAGE_VERSION}"
+        tag_name: "v${PACKAGE_VERSION}"
+        name: "Version v${PACKAGE_VERSION}"
         api_key: "${GITHUB_API_KEY}"
         file: "${ARTIFACT_PATH}"
         cleanup: true
@@ -95,7 +96,8 @@ jobs:
             -o $ARTIFACT_PATH
       deploy:
         provider: releases
-        tag_name: "Version v${PACKAGE_VERSION}"
+        tag_name: "v${PACKAGE_VERSION}"
+        name: "Version v${PACKAGE_VERSION}"
         api_key: "${GITHUB_API_KEY}"
         file: "${ARTIFACT_PATH}"
         cleanup: true
