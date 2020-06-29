@@ -48,7 +48,8 @@ jobs:
         - yarn global add gulp-cli turtle-cli@$TURTLE_VERSION
       script:
         - yarn
-        - export ARTIFACT_PATH="/home/travis/expo-project-$TRAVIS_COMMIT-`date +%s`.apk"
+        - export PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]')
+        - export ARTIFACT_PATH="/home/travis/supermunchkin-$TRAVIS_COMMIT-`date +%s`.apk"
         - turtle setup:android --sdk-version $EXPO_SDK_VERSION || travis_terminate 1
         - echo $EXPO_ANDROID_KEYSTORE_BASE64 > expo-project.jks.base64
         - base64 --decode expo-project.jks.base64 > expo-project.jks
@@ -59,9 +60,10 @@ jobs:
             -o $ARTIFACT_PATH
       deploy:
         provider: releases
+        tag_name: "Version v${PACKAGE_VERSION}"
         api_key: "${GITHUB_API_KEY}"
         file: "${ARTIFACT_PATH}"
-        cleanup: false
+        cleanup: true
         draft: true
     - stage: build standalone apps
       env:
@@ -81,7 +83,8 @@ jobs:
         - yarn global add gulp-cli turtle-cli@$TURTLE_VERSION
       script:
         - yarn
-        - export ARTIFACT_PATH="/home/travis/expo-project-$TRAVIS_COMMIT-`date +%s`.aab"
+        - export PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]')
+        - export ARTIFACT_PATH="/home/travis/supermunchkin-$TRAVIS_COMMIT-`date +%s`.aab"
         - turtle setup:android --sdk-version $EXPO_SDK_VERSION || travis_terminate 1
         - echo $EXPO_ANDROID_KEYSTORE_BASE64 > expo-project.jks.base64
         - base64 --decode expo-project.jks.base64 > expo-project.jks
@@ -92,7 +95,8 @@ jobs:
             -o $ARTIFACT_PATH
       deploy:
         provider: releases
+        tag_name: "Version v${PACKAGE_VERSION}"
         api_key: "${GITHUB_API_KEY}"
         file: "${ARTIFACT_PATH}"
-        cleanup: false
+        cleanup: true
         draft: true
